@@ -26,6 +26,7 @@
   <head>
     {{ partial "head_start.html" . }}
     {{ partial "meta.html" . }}
+    {{ partial "mathjax.html" . }}
     <title>{{ with .Title }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</title>
 
     <link rel="icon" href="{{ with .Site.Params.favicon }}{{ . }}{{ else }}/favicon.png{{ end }}">
