@@ -5,7 +5,7 @@
 {{ else if eq .Site.Params.syntaxHighlighter "prism.js" }}
 <script src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/prism.min.js"></script>
 {{ end }}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
 <!--EXTERNAL SCRIPTS END-->
 <!--SCRIPTS-->
 <script src="/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() {
   {{ end }}
 {{ end }}
 {{ if or .Params.math .Site.Params.math }}
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/mathjax/2.7.4/MathJax.js"></script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       CommonHTML: { linebreaks: { automatic: true } },
