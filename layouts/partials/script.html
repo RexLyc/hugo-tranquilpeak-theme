@@ -1,11 +1,12 @@
 <!--EXTERNAL SCRIPTS-->
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/scripts/jquery360/jquery.min.js"></script>
 {{ if eq .Site.Params.syntaxHighlighter "highlight.js" }}
-<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+<script src="/scripts/highlight.min.js"></script>
 {{ else if eq .Site.Params.syntaxHighlighter "prism.js" }}
-<script src="https://cdn.bootcdn.net/ajax/libs/prism/1.23.0/prism.min.js"></script>
+<script src="/scripts/prism.min.js"></script>
 {{ end }}
-<script src="https://cdn.bootcdn.net/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js"></script>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js"></script> -->
+<script src="/scripts/fancybox-2.1.7/jquery.fancybox.min.js"></script>
 <!--EXTERNAL SCRIPTS END-->
 <!--SCRIPTS-->
 <script src="/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
@@ -74,7 +75,7 @@ $(document).ready(function() {
   {{ end }}
 {{ end }}
 {{ if or .Params.math .Site.Params.math }}
-<script src="/scripts/MathJax-3.2.0/es5/tex-chtml.js"></script>
+<!-- <script src="/scripts/MathJax-3.2.0/es5/tex-chtml.js"></script> -->
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       CommonHTML: { linebreaks: { automatic: true } },
