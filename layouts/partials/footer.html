@@ -1,6 +1,6 @@
 <footer id="footer" class="main-content-wrap">
   <div class="copyrights">
-     Build {{ now.Format "2006-01-02" }} {{ with .Site.Params.footer.copyright }}{{ . | safeHTML }}{{ else }} &copy; {{ with .Site.Author.name }}{{ . }}{{ else }}{{ with .Site.Title }}{{ . }}{{ end }}{{ end }}{{ end }}. {{ i18n "footer.all_rights_reserved" }} 
+     Build {{ now.Format "2006-01-02 15:04:05" }} {{ with .Site.Params.footer.copyright }}{{ . | safeHTML }}{{ else }} &copy; {{ with .Site.Author.name }}{{ . }}{{ else }}{{ with .Site.Title }}{{ . }}{{ end }}{{ end }}{{ end }}. {{ i18n "footer.all_rights_reserved" }} 
   </div>
 
   <a href="https://beian.miit.gov.cn/#/Integrated/index" target="blank">{{ .Site.Params.footer.beian }}</a>
