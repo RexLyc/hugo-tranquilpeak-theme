@@ -48,7 +48,7 @@
         </ul>
       </nav>
     <ul class="post-actions post-action-share" >
-      {{ if (not (eq .Params.showSocial false)) }}
+      {{/*  {{ if (not (eq .Site.Params.showSocial false)) }}
         <li class="post-action hide-lg hide-md hide-sm">
           <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
             <i class="fa fa-share-alt"></i>
@@ -68,7 +68,7 @@
             <i class="fa fa-comment-o"></i>
           </a>
         </li>
-      {{ end }}
+      {{ end }}  */}}
       <li class="post-action">
         {{ if findRE "<!--\\s*[t|T][o|O][c|C]\\s*-->" .Content }}
           <a class="post-action-btn btn btn--default" href="#table-of-contents">
