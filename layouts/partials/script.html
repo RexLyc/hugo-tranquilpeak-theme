@@ -40,6 +40,8 @@ $(document).ready(function() {
     if (!$(this).hasClass('codeblock')) {
       $(this).addClass('codeblock');
     }
+    block.parentElement.style.display='grid';
+    block.style.margin="0px";
     hljs.highlightBlock(block);
   });
 });
