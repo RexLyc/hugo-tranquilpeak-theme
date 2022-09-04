@@ -20,5 +20,26 @@
     <ul class="sidebar-buttons">
       {{ partial "menu.html" (dict "menu" .Site.Menus.misc "root" $) }}
     </ul>
+    <ul class="sidebar-buttons">
+      
+    </ul>
+    <input type="search" style="width: 100%;appearance: none;
+    text-align: center;
+    height: 36px;
+    border-radius: 15px;
+    border: 0px solid #fff;
+    padding: 0 8px;
+    margin-bottom:10px;
+    outline: 0;
+    letter-spacing: 1px;
+    color: #fff;
+    font-weight: 600;
+    background: rgba(45,45,45,.10);
+    border: 1px solid rgba(255,255,255,.15);
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: 0 0 5px 4px rgba(0, 0, 0,0.1);" id="searchInput" class="docsearch-input" placeholder="搜索" />
   </div>
 </nav>
+{{partial "mysearch.html" .}}
+<script src="/js/mysearch.js"></script>

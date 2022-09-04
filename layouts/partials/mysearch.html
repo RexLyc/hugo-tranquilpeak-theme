@@ -1,0 +1,23 @@
+<div id="main" name="search-list"  data-behavior="{{ .Scratch.Get "sidebarBehavior" }}" 
+    class="{{ with .Params.coverimage }}hasCover{{ end }}
+            {{ if eq .Params.covermeta "out" }}hasCoverMetaOut{{ else }}hasCoverMetaIn{{ end }}
+            {{ with .Params.coverCaption }}hasCoverCaption{{ end }}" 
+            style="display:none">
+    <section class="postShorten-group main-content-wrap">
+        
+        {{ $posts := (where .Site.RegularPages "Section" "post") }}
+        
+        <h1 class="link-unstyled postShorten-title"
+          data-message-zero="{{ i18n "global.posts_found.zero" }}"
+          data-message-one="{{ i18n "global.posts_found.one" }}"
+          data-message-other="{{ i18n "global.posts_found.other" }}">
+          <p id="search-value"></p>
+          找到 {{ len $posts }} 个相关博客，展示前10个
+        </h1>
+        {{ range first 10 $posts }}
+          {{ .Render "summary" }}
+        {{ end }}
+        
+
+    </section>
+  </div>

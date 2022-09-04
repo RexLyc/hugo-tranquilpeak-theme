@@ -4,7 +4,7 @@
       {{ partial "header.html" . }}
       {{ partial "sidebar.html" . }}
       {{ partial "post/header-cover.html" . }}
-      <div id="main" data-behavior="{{ .Scratch.Get "sidebarBehavior" }}"
+      <div id="main" name="main-page" data-behavior="{{ .Scratch.Get "sidebarBehavior" }}"
         class="{{ with .Params.coverimage }}hasCover{{ end }}
                {{ if eq .Params.covermeta "out" }}hasCoverMetaOut{{ else }}hasCoverMetaIn{{ end }}
                {{ with .Params.coverCaption }}hasCoverCaption{{ end }}">
