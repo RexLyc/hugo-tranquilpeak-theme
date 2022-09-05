@@ -4,20 +4,16 @@
             {{ with .Params.coverCaption }}hasCoverCaption{{ end }}" 
             style="display:none">
     <section class="postShorten-group main-content-wrap">
-        
+        <div id="search-result">
         {{ $posts := (where .Site.RegularPages "Section" "post") }}
         
-        <h1 class="link-unstyled postShorten-title"
-          data-message-zero="{{ i18n "global.posts_found.zero" }}"
-          data-message-one="{{ i18n "global.posts_found.one" }}"
-          data-message-other="{{ i18n "global.posts_found.other" }}">
+        <h1 class="link-unstyled postShorten-title">
           <p id="search-value"></p>
           找到 {{ len $posts }} 个相关博客，展示前10个
         </h1>
         {{ range first 10 $posts }}
           {{ .Render "summary" }}
         {{ end }}
-        
-
+      </div>
     </section>
   </div>

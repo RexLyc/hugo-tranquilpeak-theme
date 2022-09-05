@@ -7,6 +7,8 @@ node_modules
 src/_bower_components
 static/js/*
 !static/js/script-*.min.js
+!static/js/fuse.min.js
+!static/js/mysearch.js
 static/css/*
 !static/css/style-*.min.css
 
