@@ -4,7 +4,7 @@
             {{ with .Params.coverCaption }}hasCoverCaption{{ end }}" 
             style="display:none">
     <section class="postShorten-group main-content-wrap">
-        <div id="search-result">
+      {{/*  <div id="search-result">
         {{ $posts := (where .Site.RegularPages "Section" "post") }}
         
         <h1 class="link-unstyled postShorten-title">
@@ -13,6 +13,33 @@
         </h1>
         {{ range first 10 $posts }}
           {{ .Render "summary" }}
+        {{ end }}
+      </div>  */}}
+      <div id="search-results">
+        {{ $posts := (where .Site.RegularPages "Section" "post") }}
+        {{ range first 10 $posts }}
+          <div class="media">
+            {{ if .Params.thumbnailImageUrl }}
+              <div class="media-left">
+                <a class="link-unstyled" href="{{ .Permalink }}">
+                  <img class="media-image" src="{{ .Params.thumbnailImageUrl }}" width="90" height="90"/>
+                </a>
+              </div>
+            {{ end }}
+            <div class="media-body">
+              <a class="link-unstyled" href="{{ .Permalink }}">
+                <h3 class="media-heading">{{ .Title }}</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  {{ .Date.Format "Jan 1, 2006" }}
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">{{ .Summary }}</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         {{ end }}
       </div>
     </section>

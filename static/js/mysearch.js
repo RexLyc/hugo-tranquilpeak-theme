@@ -20,7 +20,7 @@ var onSearch=debounce((e)=>{
     } else {
         // begin search
         // var posts=searchPost(value)
-        document.getElementById('search-value').innerText="搜索\"" + value + "\"";
+        // document.getElementById('search-value').innerText="搜索\"" + value + "\"";
         for(var page of document.getElementsByName('main-page')){
             page.style.display='none';
         }
@@ -29,7 +29,7 @@ var onSearch=debounce((e)=>{
             // showResults(document.getElementById('search-result'),posts)
             // showResultsCount(document.getElementById('search_count'),document.getElementById('search_none'),posts.length)
         }
-        console.log("input value: ",value)
+        // console.log("input value: ",value)
         // executeSearch(param(value))
         executeSearch(value)
     }
@@ -62,23 +62,20 @@ var fuseOptions = {
 var searchQuery;
 
 function executeSearch(searchQuery){
-    console.log("searchQuery:%o",searchQuery);
+    // console.log("searchQuery:%o",searchQuery);
     $.getJSON( "/index.json", function( data ) {
         var pages = data;
         var fuse = new Fuse(pages, fuseOptions);
         var result = fuse.search(searchQuery);
-        console.log({"matches":result});
-        if(result.length > 0){
-            populateResults(result,searchQuery);
-        }else{
-            $('#search-results').append("<p>No matches found</p>");
-            $('.search-list').html("haha")
-        }
+        // console.log({"matches":result});
+        populateResults(result,searchQuery);
     });
 }
 
 function populateResults(result,searchQuery){
+  var html='';
   $.each(result,function(key,value){
+    // console.log(value)
     var contents= value.item.contents;
     var snippet = "";
     var snippetHighlights=[];
@@ -101,10 +98,88 @@ function populateResults(result,searchQuery){
     if(snippet.length<1){
       snippet += contents.substring(0,summaryInclude*2);
     }
-    console.log(snippet)
+    
+    var lang = window.navigator.userLanguage || window.navigator.language || value.item.lang;
+
+    html += '<div class="media">';
+    if (value.item.thumbnailImageUrl) {
+      html += '<div class="media-left">';
+      html += '<a class="link-unstyled" href="' + (value.item.link || value.item.permalink) + '">';
+      html += '<img class="media-image" ' +
+        'src="' + value.item.thumbnailImageUrl + '" ' +
+        'width="90" height="90"/>';
+      html += '</a>';
+      html += '</div>';
+    }
+
+    html += '<div class="media-body">';
+    html += '<a class="link-unstyled" href="' + (value.item.link || value.item.permalink) + '">';
+    html += '<h3 class="media-heading">' + value.item.title + '</h3>';
+    html += '</a>';
+    html += '<span class="media-meta">';
+    html += '<span class="media-date text-small">';
+    // html += moment(value.item.date).locale(lang).format('ll');
+    html += value.item.date
+    html += '</span>';
+    html += '</span>';
+    // searchQuery = AnalyzeHighLightWords(searchQuery);
+    snippet = MarkHighLightCore(snippet,searchQuery)
+    html += '<div class="media-content hide-xs font-merryweather">' + snippet + '</div>';
+    html += '</div>';
+    html += '<div style="clear:both;"></div>';
+    html += '<hr>';
+    html += '</div>';
+
   });
+  // console.log(html)
+  $('#search-results').html(html)
+  // MarkHighLight($('#search-results'),searchQuery,null)
 }
 
 function param(name) {
     return decodeURIComponent((location.search.split(name + '=')[1] || '').split('&')[0]).replace(/\+/g, ' ');
+}
+
+function MarkHighLightCore(obj,keyWords){
+  // console.log(keyWords)
+  // 通过添加[]来避免内部包含特殊字符，一律视为整体
+  var reResult=new RegExp("(["+keyWords+"])", "gi"); 
+  return obj.replace(reResult,"<span style='background:yellow'>$1</span>");
+}
+
+function AnalyzeHighLightWords(hlWords)
+{
+    if(hlWords==null) return "";
+    hlWords=hlWords.replace(/\s+/g,"|").replace(/\|+/g,"|");            
+    hlWords=hlWords.replace(/(^\|*)|(\|*$)/g, "");
+    
+    if(hlWords.length==0) return "";
+    var wordsArr=hlWords.split("|"); 
+    
+    if(wordsArr.length>1){
+        var resultArr=BubbleSort(wordsArr);
+        var result="";
+        for(var i=0;i<resultArr.length;i++){
+            result=result+"|"+resultArr[i];
+        }                
+        return result.replace(/(^\|*)|(\|*$)/g, "");
+
+    }else{
+        return hlWords;
+    } 
+}    
+//-----利用冒泡排序法把长的关键词放前面-----    
+function BubbleSort(arr){        
+  var temp, exchange;    
+  for(var i=0;i<arr.length;i++){            
+      exchange=false;                
+      for(var j=arr.length-2;j>=i;j--){                
+          if((arr[j+1].length)>(arr[j]).length){                    
+              temp=arr[j+1]; arr[j+1]=arr[j]; arr[j]=temp;
+              exchange=true;
+          }
+      }                
+      if(!exchange)break;
+  }
+  return arr;            
 }
