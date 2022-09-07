@@ -119,6 +119,9 @@
 - id: "footer.all_rights_reserved"
   translation: "All Rights Reserved"
 
+- id: "footer.some_rights_reserved"
+  translation: "Some Rights Reserved"
+
 ## DATE ##
 - id: "date.month.january"
   translation: "一月"

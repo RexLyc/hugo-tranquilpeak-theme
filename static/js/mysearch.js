@@ -45,17 +45,16 @@ summaryInclude=60;
 var fuseOptions = {
   shouldSort: true,
   includeMatches: true,
-  threshold: 0.0,
-  tokenize:true,
+  threshold: 0.3,
   location: 0,
-  distance: 100,
+  distance: 1000,
   maxPatternLength: 32,
   minMatchCharLength: 1,
   keys: [
     {name:"title",weight:0.8},
-    {name:"contents",weight:0.5},
-    {name:"tags",weight:0.3},
-    {name:"categories",weight:0.3}
+    {name:"contents",weight:0.9},
+    // {name:"tags",weight:0.3},
+    // {name:"categories",weight:0.3}
   ]
 };
 
@@ -78,19 +77,12 @@ function populateResults(result,searchQuery){
     // console.log(value)
     var contents= value.item.contents;
     var snippet = "";
-    var snippetHighlights=[];
-    var tags =[];
-    if( fuseOptions.tokenize ){
-      snippetHighlights.push(searchQuery);
-    }else{
+    {
       $.each(value.matches,function(matchKey,mvalue){
-        if(mvalue.key == "tags" || mvalue.key == "categories" ){
-          snippetHighlights.push(mvalue.value);
-        }else if(mvalue.key == "contents"){
+        if(mvalue.key == "contents"){
           start = mvalue.indices[0][0]-summaryInclude>0?mvalue.indices[0][0]-summaryInclude:0;
           end = mvalue.indices[0][1]+summaryInclude<contents.length?mvalue.indices[0][1]+summaryInclude:contents.length;
           snippet += contents.substring(start,end);
-          snippetHighlights.push(mvalue.value.substring(mvalue.indices[0][0],mvalue.indices[0][1]-mvalue.indices[0][0]+1));
         }
       });
     }
@@ -114,7 +106,7 @@ function populateResults(result,searchQuery){
 
     html += '<div class="media-body">';
     html += '<a class="link-unstyled" href="' + (value.item.link || value.item.permalink) + '">';
-    html += '<h3 class="media-heading">' + value.item.title + '</h3>';
+    html += '<h3 class="media-heading">' + MarkHighLightCore(value.item.title,searchQuery) + '</h3>';
     html += '</a>';
     html += '<span class="media-meta">';
     html += '<span class="media-date text-small">';
