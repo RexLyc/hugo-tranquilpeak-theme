@@ -15,6 +15,7 @@
         
                <div style="display:grid;grid-template-areas:'ad main main aside'
                'footer footer footer footer'">
+        
         <article class="post" itemscope itemType="http://schema.org/BlogPosting" style="grid-area: main">
           {{ with .Params.covercaption }}
             <span class="post-header-cover-caption caption">{{ . | markdownify }}</span>
@@ -22,8 +23,11 @@
           {{ if or (not .Params.coverimage) (eq .Params.covermeta "out") }}
             {{ partial "post/header.html" . }}
           {{ end }}
-            
             <div class="post-content markdown" itemprop="articleBody">
+              <div class="main-content-wrap" id="main-content-toc">
+                <h3>目录</h3>
+                {{ .TableOfContents }}
+              </div>
               <div class="main-content-wrap">
                 {{ (replaceRE "<!--\\s*[t|T][o|O][c|C]\\s*-->" (printf "<h1 id=\"table-of-contents\">%s</h1>%s" (i18n "post.toc") .TableOfContents) .Content) | safeHTML }}
                 {{ partial "post/gallery.html" . }}
@@ -50,13 +54,13 @@
           </div>
 
         </article>
-        <aside style="position: sticky;
+        <div class="aside-toc" style="position: sticky;
               top: 6rem;
               align-self: start;
               grid-area: aside;">
                 <h3>目录</h3>
                 {{ .TableOfContents }}
-        </aside >
+        </div>
         
         
         <div style="grid-area: footer;">
