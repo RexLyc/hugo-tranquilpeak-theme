@@ -86,6 +86,32 @@ $(document).ready(function() {
     });
   </script>
 {{ end }}
+
+{{ if .Params.mermaid }}
+<script
+  src="/scripts/mermaid.min.js"
+></script>
+<script>
+  // Replace mermaid pre.code to div
+  Array.from(document.getElementsByClassName("language-mermaid")).forEach(
+    (el) => {
+      el.parentElement.outerHTML = `<div class="mermaid">${el.innerText}</div>`;
+    }
+  );
+  mermaid.initialize({
+    securityLevel: 'loose',
+    theme: 'neutral',
+  });
+</script>
+<style>
+  /* Set svg to center */
+  .mermaid svg {
+    display: block;
+    margin: auto;
+  }
+</style>
+{{ end }}
+
 {{ with .Site.Params.algolia }}
   {{ if (isset . "appId") | and (isset . "apiKey") | and (isset . "indexName") }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.min.js" integrity="sha256-TbOIe++NbC9P3KTtUMJ5wcROlBdnRqrPleLdpPg3xxE=" crossorigin="anonymous"></script>
