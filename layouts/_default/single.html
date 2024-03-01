@@ -56,7 +56,7 @@
         </article>
         <div class="aside-toc" style="position: sticky;
               top: 6rem;
-              right:6rem;
+              padding-right:6rem;
               align-self: start;
               grid-area: aside;">
                 <h3>目录</h3>
@@ -84,31 +84,34 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  mask-image: linear-gradient(180deg, transparent 0, #000 3rem calc(100% - 3rem), transparent);
+  mask-image: linear-gradient(180deg, #000 3rem calc(100% - 3rem), transparent);
+  /* mask-image: linear-gradient(180deg, transparent 0, #000 3rem calc(100% - 3rem), transparent); */
   overflow: auto;
   position: sticky;
+  
+}
+
+.aside-toc>nav>ul{
   border-left: 1px solid #ccc;
 }
 
-/* // common.less */
+/* common.less */
 *::-webkit-scrollbar {
-    width: 10px;
-    /* // height: 10px; // 高度写不写，都不影响，因为会根据内容的长度自动计算 */
+  width: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
-  /* // 滑块颜色 */
-    background: #ccc; 
-    /* // 滑块圆角 */
-    border-radius: 5px; 
+  /* 滑块颜色 */
+  background: #ccc; 
+  /* 滑块圆角 */
+  border-radius: 5px; 
 }
 
-/* // 兼容Firefox、IE */
+/* 兼容Firefox、IE */
 * {
-    scrollbar-width: 10px;
-    scrollbar-base-color: green;
-    scrollbar-track-color: red;
-    scrollbar-arrow-color: blue;
+  scrollbar-width: 10px;
+  scrollbar-base-color: green;
+  scrollbar-track-color: red;
+  scrollbar-arrow-color: blue;
 }
-
 </style>
